@@ -1,13 +1,13 @@
 
-package com.junk.application.awttween;
+package com.elmerhd.awttween;
 
-import java.awt.Frame;
+import java.awt.Dialog;
 
 /**
  * The dialog accessor access the dialog class values and attributes
  * @author Elmerhd
  */
-public class FrameAccessor implements aurelienribon.tweenengine.TweenAccessor<Frame>{
+public class DialogAccessor implements aurelienribon.tweenengine.TweenAccessor<Dialog>{
     /**
      * the position X
      */
@@ -44,7 +44,7 @@ public class FrameAccessor implements aurelienribon.tweenengine.TweenAccessor<Fr
      * @return the values returned
      */
     @Override
-    public int getValues(Frame t, int tweenType, float[] retVal) {
+    public int getValues(Dialog t, int tweenType, float[] retVal) {
         switch(tweenType){
             case POSITION_X: retVal[0] = t.getX();return 1;
             case POSITION_Y: retVal[0] = t.getY();return 1;
@@ -66,7 +66,7 @@ public class FrameAccessor implements aurelienribon.tweenengine.TweenAccessor<Fr
      * @param newVal  the newValue
      */
     @Override
-    public void setValues(Frame t, int tweenType, float[] newVal) {
+    public void setValues(Dialog t, int tweenType, float[] newVal) {
         switch(tweenType){
             case POSITION_X:t.setBounds((int) newVal[0], t.getY(), t.getWidth(), t.getHeight());break;
             case POSITION_Y:t.setBounds(t.getX(),(int) newVal[0], t.getWidth(), t.getHeight());break;

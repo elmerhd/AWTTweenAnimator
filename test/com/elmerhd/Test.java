@@ -1,14 +1,21 @@
-package com.junk.application;
+package com.elmerhd;
 
 import aurelienribon.tweenengine.Timeline;
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenManager;
 import aurelienribon.tweenengine.equations.Bounce;
-import com.junk.application.awttween.AWTTweenManipulator;
-import com.junk.application.awttween.ComponentAccessor;
-import com.junk.application.awttween.FrameAccessor;
+import com.elmerhd.awttween.TweenAnimator;
+import com.elmerhd.awttween.ComponentAccessor;
+import com.elmerhd.awttween.FrameAccessor;
+import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Label;
 import java.awt.Toolkit;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
  *
@@ -16,7 +23,7 @@ import java.awt.Toolkit;
  */
 public class Test extends javax.swing.JFrame {
     private TweenManager manager = new TweenManager();
-    private AWTTweenManipulator manipulator = new AWTTweenManipulator();
+    private TweenAnimator manipulator = new TweenAnimator();
     /**
      * Creates new form Test
      */
@@ -26,6 +33,12 @@ public class Test extends javax.swing.JFrame {
         manipulator.registerClassAccessor(FrameAccessor.class, new FrameAccessor(), manager);
         manipulator.setCombineAttrLimits(4);
         manipulator.start();
+        
+        this.getContentPane().add(myPanel);
+        
+        this.revalidate();
+        this.repaint();
+        
     }
 
     /**
@@ -38,24 +51,34 @@ public class Test extends javax.swing.JFrame {
     private void initComponents() {
 
         myPanel = new javax.swing.JPanel();
+        label = new javax.swing.JLabel();
         btn1 = new javax.swing.JButton();
         btn2 = new javax.swing.JButton();
         btn3 = new javax.swing.JButton();
         btn4 = new javax.swing.JButton();
+        btn5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         myPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Panel 1", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Monospaced", 0, 14))); // NOI18N
 
+        label.setText("Label");
+
         javax.swing.GroupLayout myPanelLayout = new javax.swing.GroupLayout(myPanel);
         myPanel.setLayout(myPanelLayout);
         myPanelLayout.setHorizontalGroup(
             myPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 133, Short.MAX_VALUE)
+            .addGroup(myPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(label, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
+                .addContainerGap())
         );
         myPanelLayout.setVerticalGroup(
             myPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGroup(myPanelLayout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(label)
+                .addContainerGap(112, Short.MAX_VALUE))
         );
 
         btn1.setText("Move Panel 1");
@@ -86,6 +109,13 @@ public class Test extends javax.swing.JFrame {
             }
         });
 
+        btn5.setText("Change Font Size");
+        btn5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -93,6 +123,7 @@ public class Test extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(myPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btn1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -100,9 +131,10 @@ public class Test extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btn3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btn4))
-                    .addComponent(myPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(152, Short.MAX_VALUE))
+                        .addComponent(btn4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn5)))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -112,10 +144,11 @@ public class Test extends javax.swing.JFrame {
                     .addComponent(btn1)
                     .addComponent(btn2)
                     .addComponent(btn3)
-                    .addComponent(btn4))
+                    .addComponent(btn4)
+                    .addComponent(btn5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(myPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(581, Short.MAX_VALUE))
+                .addContainerGap(527, Short.MAX_VALUE))
         );
 
         pack();
@@ -147,6 +180,12 @@ public class Test extends javax.swing.JFrame {
                 .push(Tween.to(this, FrameAccessor.POSITION_X, 2f).target(screenW-frameW).ease(Bounce.OUT))
                 .start(manager);
     }//GEN-LAST:event_btn4ActionPerformed
+
+    private void btn5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn5ActionPerformed
+        Timeline.createSequence()
+                .push(Tween.to(label, ComponentAccessor.FONT_SIZE, 1f).target(100).ease(Bounce.OUT))
+                .start(manager);
+    }//GEN-LAST:event_btn5ActionPerformed
     public int getCenterX(){
         int screenW = Toolkit.getDefaultToolkit().getScreenSize().width;
         int frameW = this.getWidth();
@@ -199,6 +238,8 @@ public class Test extends javax.swing.JFrame {
     private javax.swing.JButton btn2;
     private javax.swing.JButton btn3;
     private javax.swing.JButton btn4;
+    private javax.swing.JButton btn5;
+    private javax.swing.JLabel label;
     private javax.swing.JPanel myPanel;
     // End of variables declaration//GEN-END:variables
 }

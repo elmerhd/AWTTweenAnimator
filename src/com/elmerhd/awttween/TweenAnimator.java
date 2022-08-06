@@ -1,5 +1,5 @@
 
-package com.junk.application.awttween;
+package com.elmerhd.awttween;
 
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenAccessor;
@@ -14,7 +14,7 @@ import javax.swing.SwingUtilities;
  * in every seconds of time.
  * @author Elmerhd
  */
-public class AWTTweenManipulator{
+public class TweenAnimator{
     private TweenManager tweenManager;
     private boolean running = false;
     /**

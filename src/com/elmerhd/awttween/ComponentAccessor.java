@@ -1,7 +1,9 @@
 
-package com.junk.application.awttween;
+package com.elmerhd.awttween;
 
 import java.awt.Component;
+import java.awt.Font;
+import java.awt.Graphics;
 
 /**
  * The component accessor access the component class values and attributes
@@ -32,6 +34,10 @@ public class ComponentAccessor implements aurelienribon.tweenengine.TweenAccesso
      * the width and height
      */
     public static final int LAYOUT_WH = 5;
+    
+    public static final int FONT_SIZE = 6;
+    
+    
     /**
      * gets all the values of the view class
      * @param t the view component target
@@ -51,6 +57,8 @@ public class ComponentAccessor implements aurelienribon.tweenengine.TweenAccesso
             case LAYOUT_WH: retVal[0] = t.getWidth();
                 retVal[1] = t.getHeight();
                 return 2;
+            case FONT_SIZE: retVal[0] = t.getFont().getSize();
+                return 1;
                 default:assert false;return 0;
         }
     }
@@ -69,6 +77,7 @@ public class ComponentAccessor implements aurelienribon.tweenengine.TweenAccesso
             case LAYOUT_W:t.setBounds(t.getX(), t.getY(), (int) newVal[0], t.getHeight());break;
             case LAYOUT_H:t.setBounds(t.getX(), t.getY(), t.getWidth(), (int) newVal[0]);break;
             case LAYOUT_WH:t.setBounds(t.getX(), t.getY(), (int)newVal[0], (int) newVal[1]);break;
+            case FONT_SIZE: t.setFont(new Font(t.getFont().getFontName(), t.getFont().getStyle(), (int) newVal[0]));
                 default:assert false;break;
         }
     }
